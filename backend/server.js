@@ -29,6 +29,16 @@ app.get('/', (req, res) => {
 // Start server
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+const db = require('./db');
+
+db.query('SELECT 1 AS test', (err, results) => {
+    if (err) {
+        console.error('Database connection failed:', err);
+    } else {
+        console.log('Database connected successfully:', results);
+    }
 });
